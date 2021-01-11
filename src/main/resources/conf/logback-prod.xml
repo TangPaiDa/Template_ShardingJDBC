@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--定义日志文件的存储地址，要使用绝对路径-->
+    <property name="LOG_SAVE_PATH" value="/LogBack/TemplateForProject" />
+
+    <!--保存info级别日志-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-6level --《 %logger{50} 》-- =>| %msg %n</pattern>
+        </encoder>
+        <!--滚动策略，每天生产日志文件：定义了保存路径、保留天数-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_SAVE_PATH}/InfoLog/%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!--过滤日志，不保留wrror级别的日志，若有warn级别，依旧会保留在文件中；另外项目的启动日志也会保留在里面-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+
+    <!--保存error级别日志-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-6level --《 %logger{50} 》-- =>| %msg %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_SAVE_PATH}/ErrorLog/%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!--选取日志，只保留error级别日志-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <!--日志级别，项目中在该级别以下的日志将不会被输出；在此处配置输出位置设定的节点-->
+    <root level="info">
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+
+</configuration>

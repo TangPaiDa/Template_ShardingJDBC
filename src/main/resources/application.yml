@@ -1,0 +1,9 @@
+#配置服务器使用的配置文件
+spring:
+  profiles:
+    active: dev
+
+#配置mybati节点，注意是独立于spring的节点
+mybatis:
+  mapper-locations: classpath:mapper/*/*.xml #mapper文件所在路径
+#  type-aliases-package: cn.tang.entity   #实体类的路径，不配置也可以运行

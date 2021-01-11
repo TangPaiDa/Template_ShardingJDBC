@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--控制台输出-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!--格式化输出：%d表示日期，%thread表示线程名，%-6level表示级别，%logger{50}是类全称，%msg表示日志消息，%n是换行符-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%yellow(%d{HH:mm:ss})  %highlight(%-6level) 《 %cyan(%logger{50}) 》-- =>| %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <!--打印输出sql语句，注意dao包的位置-->
+    <logger name="cn.tang.userMode.dao" level="DEBUG" />
+
+    <!--日志级别，项目中在该级别以下的日志将不会被输出；在此处配置输出位置设定的节点-->
+    <root level="info">
+<!--    <root level="debug">-->
+        <appender-ref ref="consoleLog" />
+    </root>
+</configuration>
