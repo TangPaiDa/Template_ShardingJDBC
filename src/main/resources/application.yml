@@ -1,9 +1,43 @@
-#配置服务器使用的配置文件
-spring:
-  profiles:
-    active: dev
+#开发环境配置文件
 
-#配置mybati节点，注意是独立于spring的节点
-mybatis:
-  mapper-locations: classpath:mapper/*/*.xml #mapper文件所在路径
-#  type-aliases-package: cn.tang.entity   #实体类的路径，不配置也可以运行
+#配置服务器端口号、虚拟路径名称
+server:
+  port: 80
+  servlet:
+    context-path: /Template_ShardingJDBC
+
+#日志相关配置
+logging:
+  config: classpath:conf/logback-dev.xml
+
+spring:
+  #Sharding-JDBC 分片策略
+  shardingsphere:
+    #Sharding-JDBC 数据源配置
+    datasource:
+      names: shardingsql
+      shardingsql:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/sharding_jdbc?serverTimezone=GMT%2B8
+        username: user
+        password: 123456
+    #对 course 表进行配置
+    sharding:
+      tables:
+        course:
+          #配置数据节点 course_1,course_2
+          actual-data-nodes: shardingsql.course_$->{1..2}
+          #指定主键、主键生成策略为 SNOWFLAKE 雪花算法；（还是使用自己生成的自增id好些）
+          #key-generator:
+            #column: c_id
+            #type: SNOWFLAKE
+          #指定分片策略，包括分片键和分片算法，偶数存到 1 表，奇数存到 2 表
+          table-strategy:
+            inline:
+              sharding-column: c_id
+              algorithm-expression: course_$->{c_id % 2 + 1}
+    props:
+      sql:
+        show: true
+

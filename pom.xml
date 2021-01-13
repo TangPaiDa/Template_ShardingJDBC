@@ -30,51 +30,30 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--数据库相关：数据库连接池采用阿里的druid，不用DBCP；数据库；mybatis；分页插件-->
+		<!--数据库相关：数据库连接池druid、mysql 数据库、sharding-jdbc、mybatis-plus-->
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>1.1.20</version>
-		</dependency>
-		<!--<dependency>
-			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.0.28</version>
-		</dependency>-->
+			<version>1.2.4</version>
+		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.shardingsphere</groupId>
-			<artifactId>shardingsphere-jdbc-core</artifactId>
-			<version>5.0.0-alpha</version>
+			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+			<version>4.1.1</version>
 		</dependency>
 
-		<!--mybatis-plus-->
+
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
 			<version>3.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-generator</artifactId>
-			<version>3.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-engine-core</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<!--AOP配置-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 		<!--lombok-->
@@ -82,36 +61,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-
-		<!--json-->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.62</version>
-		</dependency>
-
-		<!-- JWT -->
-		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>java-jwt</artifactId>
-			<version>3.10.3</version>
-		</dependency>
-
-		<!--AES/RSA 加解密相关-->
-		<dependency>
-			<groupId>cn.tang</groupId>
-			<artifactId>encryption</artifactId>
-			<version>1.3.0-SNAPSHOT</version>
-		</dependency>
-
-		<!--httpclient-->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.13</version>
-		</dependency>
-
-
 
 	</dependencies>
 
